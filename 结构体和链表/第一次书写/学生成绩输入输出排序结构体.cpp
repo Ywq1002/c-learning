@@ -1,0 +1,43 @@
+#include<stdio.h>
+
+struct student{
+	int Num;
+	char Name[20];
+	float score;
+	int Rank;
+};
+ 
+int main(){
+	struct student stu[100],sTutemp;
+	int n;
+	scanf("%d",&n);
+	for(int i=0;i<n;i++){
+		scanf("%d %s %f",&stu[i].Num,stu[i].Name,&stu[i].score);//TODO
+	}
+	for(int i=0;i<n-1;i++){
+		//TODO
+		for(int j=0;j<n-1-i;j++){
+		    if(stu[j+1].score<stu[j].score){
+				sTutemp=stu[j];
+				stu[j]=stu[j+1];
+				stu[j+1]=sTutemp;
+			}
+         
+		}
+	}
+	for(int i=0;i<n;i++){
+		printf("%d %s %f",stu[i].Num,stu[i].Name,stu[i].score);
+	}
+	int currentRank=1;
+	stu[n-1].Rank=currentRank;
+	for(int i=n-2;i>=0;i--){
+		if(stu[i].score==stu[i+1].score){
+			stu[i].Rank=currentRank;
+		}else {currentRank++;
+		stu[i].Rank=currentRank;}
+	}
+	for(int i=0;i<n;i++){
+		printf("%d",stu[i].Rank);
+	}
+	return 0;
+}
